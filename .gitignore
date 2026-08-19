@@ -4,3 +4,4 @@ __pycache__/
 filings/
 sections/
 chunks/
+qdrant_local_db/
