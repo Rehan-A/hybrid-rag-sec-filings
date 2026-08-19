@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from FlagEmbedding import BGEM3FlagModel
+from FlagEmbedding import BGEM3FlagModel, FlagReranker
 from fastembed import SparseTextEmbedding
 from qdrant_client import QdrantClient, models
 
@@ -8,6 +8,7 @@ QDRANT_PATH = "./qdrant_local_db"
 COLLECTION_NAME = "sec_filings"
 DENSE_MODEL_NAME = "BAAI/bge-m3"
 SPARSE_MODEL_NAME = "Qdrant/bm25"
+RERANKER_MODEL_NAME = "BAAI/bge-reranker-v2-m3"
 DENSE_VECTOR_NAME = "dense"
 SPARSE_VECTOR_NAME = "sparse"
 
@@ -21,7 +22,7 @@ def reciprocal_rank_fusion(dense_results, sparse_results, k=60):
     return scores
 
 
-def hybrid_search(query, client, dense_model, sparse_model, top_k=5, fetch_k=20, k=60):
+def hybrid_search(query, client, dense_model, sparse_model, reranker, top_k=5, fetch_k=20, k=60, rerank_candidates=20):
     # 1. dense query embedding
     dense_query_vec = dense_model.encode(
         [query], return_dense=True, return_sparse=False, return_colbert_vecs=False
@@ -68,21 +69,40 @@ def hybrid_search(query, client, dense_model, sparse_model, top_k=5, fetch_k=20,
     for result in dense_results + sparse_results:
         id_to_result[result.id] = result
 
-    # sort chunk_ids by fused RRF score, descending, take top_k
-    ranked_ids = sorted(fused_scores.items(), key=lambda item: item[1], reverse=True)[:top_k]
+    # sort chunk_ids by fused RRF score, descending — take a larger candidate
+    # set than top_k, so the reranker has real options to work with
+    candidate_ids = sorted(fused_scores.items(), key=lambda item: item[1], reverse=True)[:rerank_candidates]
+
+    # --- DEBUG: original RRF-only order, before reranking ---
+    print(f"[debug] RRF-only top {top_k} (pre-rerank):")
+    for chunk_point_id, rrf_score in candidate_ids[:top_k]:
+        result = id_to_result[chunk_point_id]
+        print(f"  rrf={rrf_score:.5f}  {result.payload['ticker']} {result.payload['item_num']}  {result.payload['chunk_id']}")
+    # ---------------------------------------------------------
+
+    # 7. rerank the candidate set with a cross-encoder, scored in one batched call
+    candidates = [id_to_result[chunk_point_id] for chunk_point_id, _ in candidate_ids]
+    pairs = [[query, candidate.payload["text"]] for candidate in candidates]
+    rerank_scores = reranker.compute_score(pairs, normalize=True)
+
+    # 8. sort candidates by rerank score, descending — RRF score is discarded
+    #    for ordering purposes but kept in the result for transparency
+    reranked = sorted(
+        zip(candidates, [rrf_score for _, rrf_score in candidate_ids], rerank_scores),
+        key=lambda item: item[2],
+        reverse=True,
+    )[:top_k]
 
     final_results = []
-    for chunk_point_id, rrf_score in ranked_ids:
-        result = id_to_result[chunk_point_id]
+    for result, rrf_score, rerank_score in reranked:
         final_results.append({
             "chunk_id": result.payload["chunk_id"],
             "ticker": result.payload["ticker"],
             "item_num": result.payload["item_num"],
             "text": result.payload["text"],
             "rrf_score": rrf_score,
+            "rerank_score": rerank_score,
         })
-    
-    
 
     return final_results
 
@@ -96,14 +116,15 @@ if __name__ == "__main__":
     client = QdrantClient(path=QDRANT_PATH)
     dense_model = BGEM3FlagModel(DENSE_MODEL_NAME, use_fp16=False)
     sparse_model = SparseTextEmbedding(model_name=SPARSE_MODEL_NAME)
+    reranker = FlagReranker(RERANKER_MODEL_NAME, use_fp16=False)
 
-    results = hybrid_search(query, client, dense_model, sparse_model, top_k=5)
+    results = hybrid_search(query, client, dense_model, sparse_model, reranker, top_k=5, rerank_candidates=20)
 
-    print(f"Query: {query!r}\n")
-    print("Top 5 hybrid (RRF-fused) results:\n")
+    print(f"\nQuery: {query!r}\n")
+    print("Top 5 hybrid results (RRF candidates, reranked):\n")
     for r in results:
         preview = r["text"][:150].replace("\n", " ")
-        print(f"rrf={r['rrf_score']:.5f}  {r['ticker']} {r['item_num']}  {r['chunk_id']}")
+        print(f"rerank={r['rerank_score']:.4f}  rrf={r['rrf_score']:.5f}  {r['ticker']} {r['item_num']}  {r['chunk_id']}")
         print(f"  {preview}...")
         print()
 
