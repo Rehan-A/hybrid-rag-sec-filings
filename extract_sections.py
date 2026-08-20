@@ -10,6 +10,16 @@ SECTIONS_DIR = "sections"
 
 ITEM_PATTERN = re.compile(r'\bItem\s*(\d+[A-Z]?)\s*\.\s*', re.IGNORECASE)
 
+# 10-Qs have two parts that both number their items 1-4 (Part I: Financial
+# Statements, MD&A, Market Risk, Controls; Part II: Legal Proceedings,
+# Unregistered Sales, Defaults, Mine Safety) — the plain "last occurrence wins"
+# rule below conflates them and silently drops Part I's real content in favor
+# of Part II's boilerplate. "Item 1. Legal Proceedings" is form-mandated
+# wording unique to Part II's Item 1 across every filer, so its last
+# occurrence reliably marks where Part II begins.
+PART_II_BOUNDARY_PATTERN = re.compile(r'Item\s*1\s*\.\s*Legal\s+Proceedings', re.IGNORECASE)
+PART_I_ITEM_NUMS = {"1", "2", "3", "4"}
+
 
 def parse_filename(filename):
     stem = os.path.splitext(filename)[0]
@@ -38,8 +48,24 @@ def extract_sections(html):
     for m in matches:
         by_item[m.group(1)].append(m.start())
 
-    # for each item number, the LAST occurrence is the real section header
-    real_headers = {item_num: positions[-1] for item_num, positions in by_item.items()}
+    boundary_matches = list(PART_II_BOUNDARY_PATTERN.finditer(clean_text))
+    part_ii_start = boundary_matches[-1].start() if len(boundary_matches) >= 2 else None
+
+    real_headers = {}
+    for item_num, positions in by_item.items():
+        if part_ii_start is not None and item_num in PART_I_ITEM_NUMS:
+            part1_positions = [p for p in positions if p < part_ii_start]
+            part2_positions = [p for p in positions if p >= part_ii_start]
+            if part1_positions and part2_positions:
+                # genuine Part I / Part II collision on this item number —
+                # keep both as distinct sections instead of last-occurrence
+                # silently discarding Part I's real content
+                real_headers[item_num] = part1_positions[-1]
+                real_headers[f"{item_num}_partII"] = part2_positions[-1]
+                continue
+        # no collision (or no reliable Part II boundary found): the LAST
+        # occurrence is the real section header, as before
+        real_headers[item_num] = positions[-1]
 
     # sort by position so we know section order and can compute section boundaries
     sorted_items = sorted(real_headers.items(), key=lambda x: x[1])

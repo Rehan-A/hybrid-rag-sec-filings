@@ -1,0 +1,87 @@
+[
+  {
+    "question": "What was Apple's total net sales for fiscal year 2025?",
+    "ground_truth": "Apple's total net sales for fiscal year 2025 were $416,161 million (about $416.2 billion), up 6% from $391,035 million in fiscal year 2024.",
+    "category": "exact_lookup"
+  },
+  {
+    "question": "What was Microsoft's total revenue for fiscal year 2025?",
+    "ground_truth": "Microsoft's total revenue for fiscal year 2025 (ended June 30, 2025) was $281,724 million (about $281.7 billion), up from $245,122 million in fiscal year 2024.",
+    "category": "exact_lookup"
+  },
+  {
+    "question": "What was NVIDIA's total revenue for fiscal year 2025?",
+    "ground_truth": "NVIDIA's total revenue for fiscal year 2025 (ended January 26, 2025) was $130,497 million (about $130.5 billion), up from $60,922 million in fiscal year 2024.",
+    "category": "exact_lookup"
+  },
+  {
+    "question": "What was Adobe's total revenue for fiscal year 2024?",
+    "ground_truth": "Adobe's total revenue for fiscal year 2024 (ended November 29, 2024) was $21,505 million (about $21.5 billion), up 11% from $19,409 million in fiscal year 2023.",
+    "category": "exact_lookup"
+  },
+  {
+    "question": "What was Salesforce's total revenue for fiscal year 2025?",
+    "ground_truth": "Salesforce's total revenue for fiscal year 2025 (ended January 31, 2025) was $37,895 million (about $37.9 billion), up from $34,857 million in fiscal year 2024.",
+    "category": "exact_lookup"
+  },
+  {
+    "question": "What was Apple's diluted earnings per share for fiscal year 2025?",
+    "ground_truth": "Apple's diluted earnings per share for fiscal year 2025 was $7.46, up from $6.08 in fiscal year 2024. Net income was $112,010 million, up from $93,736 million.",
+    "category": "exact_lookup"
+  },
+  {
+    "question": "What are Apple's main supply chain risks?",
+    "ground_truth": "Apple's supply chain risks include: natural disasters, extreme weather, and industrial accidents disrupting operations at its concentrated manufacturing base in China mainland, Taiwan, and other parts of Asia; reliance on single or limited sources for many critical components, making it vulnerable to shortages and price increases if a supplier fails or a source is disrupted; design and manufacturing defects that could create safety, environmental, or reputational harm; and major public health issues such as pandemics disrupting global demand and distribution channels.",
+    "category": "semantic"
+  },
+  {
+    "question": "How does Microsoft describe its cybersecurity risk exposure?",
+    "ground_truth": "Microsoft describes facing continuous cyberattacks from individual hackers, organized cybercriminal groups, and nation-state or state-sponsored actors targeting both its customers and its internal infrastructure. It states it has experienced cybersecurity incidents involving unauthorized access to its systems and data, including customer data, and that such attacks could reduce revenue, increase costs, expose it to liability claims, or harm its reputation and competitive position. It also notes that legislative and regulatory action on cybersecurity may increase compliance costs.",
+    "category": "semantic"
+  },
+  {
+    "question": "What competitive risks does Salesforce identify in its business?",
+    "ground_truth": "Salesforce describes the market for enterprise applications and platform services as intensely competitive, rapidly evolving, fragmented, and having low barriers to entry, with frequent new product introductions. It notes many prospective customers have already invested substantial resources integrating their current enterprise software and may be reluctant to migrate to a different vendor. Salesforce says it must continually innovate and expand its services to keep pace with technological change or its ability to compete effectively could be harmed.",
+    "category": "semantic"
+  },
+  {
+    "question": "How does Adobe describe the risk that generative AI poses to its business?",
+    "ground_truth": "Adobe states that generative AI technologies let users of all skill levels create content and interact with documents in new ways, which could significantly disrupt the industries Adobe operates in and harm Adobe's existing products and business if Adobe fails to invest in or adapt to the technology. Adobe notes it has responded by releasing its own generative AI products, such as Adobe Firefly, and is focused on enhancing AI across its offerings.",
+    "category": "semantic"
+  },
+  {
+    "question": "What is NVIDIA's core business strategy as described in its 10-K?",
+    "ground_truth": "NVIDIA describes itself as a full-stack accelerated computing infrastructure company built around the CUDA programming model, which runs on all NVIDIA GPUs, plus hundreds of domain-specific software libraries, SDKs, and APIs. This software stack is designed to accelerate performance and ease deployment of accelerated computing for workloads like AI model training and inference, data analytics, scientific computing, and 3D graphics, with vertical-specific optimizations for industries such as healthcare, telecom, automotive, and manufacturing.",
+    "category": "semantic"
+  },
+  {
+    "question": "What is Salesforce's Agentforce and how does it fit into its product strategy?",
+    "ground_truth": "Agentforce is described as the agentic layer of the Salesforce Platform. It lets customers build and augment their teams with an always-on digital labor force by deploying autonomous AI agents across business functions, aiming to increase productivity, lower costs, and drive operational efficiencies. It is positioned as a flexible, easily configured, rapidly deployed offering that integrates with other platforms and enterprise applications.",
+    "category": "semantic"
+  },
+  {
+    "question": "How did NVIDIA's quarterly research and development spending trend across its three most recent fiscal quarters?",
+    "ground_truth": "NVIDIA's R&D expenses increased each of its three most recent fiscal quarters: $3,989 million in Q1 FY2026 (up 47% year-over-year), $4,291 million in Q2 FY2026 (up 39% year-over-year), and $4,705 million in Q3 FY2026 (up 39% year-over-year). This continues the growth trend from fiscal year 2025's full-year R&D spending of $12,914 million, up from $8,675 million in fiscal year 2024.",
+    "category": "cross_document"
+  },
+  {
+    "question": "Which company had higher total revenue in its most recent fiscal year: Apple or Microsoft?",
+    "ground_truth": "Apple had higher total revenue, with $416,161 million in fiscal year 2025 versus Microsoft's $281,724 million in fiscal year 2025 — Apple's revenue was about 48% higher than Microsoft's.",
+    "category": "cross_document"
+  },
+  {
+    "question": "How does NVIDIA's revenue growth rate compare to Adobe's over their most recent fiscal years?",
+    "ground_truth": "NVIDIA grew revenue about 114% year-over-year in fiscal year 2025 ($130,497 million versus $60,922 million in fiscal year 2024), driven by data center and AI demand, while Adobe grew revenue about 11% in fiscal year 2024 ($21,505 million versus $19,409 million in fiscal year 2023). NVIDIA's growth rate was dramatically faster than Adobe's steadier, subscription-driven growth.",
+    "category": "cross_document"
+  },
+  {
+    "question": "How do NVIDIA's and Microsoft's R&D spending compare as a share of their total revenue in their most recent fiscal years?",
+    "ground_truth": "In fiscal year 2025, NVIDIA spent $12,914 million on R&D against $130,497 million in revenue, about 9.9% of revenue. Microsoft spent $32,488 million on R&D against $281,724 million in revenue, about 11.5% of revenue. Microsoft's R&D spending was a slightly higher share of revenue than NVIDIA's, despite NVIDIA's much faster revenue growth.",
+    "category": "cross_document"
+  },
+  {
+    "question": "How does Microsoft's most recent quarterly R&D spending compare to NVIDIA's most recent quarterly R&D spending?",
+    "ground_truth": "In its most recent quarter (ended September 30, 2025), Microsoft spent $8,146 million on R&D, up 8% year-over-year, equal to about 10% of revenue. In its most recent quarter (Q3 fiscal year 2026), NVIDIA spent $4,705 million on R&D. Microsoft's quarterly R&D spending was significantly higher than NVIDIA's in absolute dollar terms, roughly 73% more.",
+    "category": "cross_document"
+  }
+]

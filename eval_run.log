@@ -1,0 +1,260 @@
+C:\Users\Rehan\Documents\AI Projects\Finance RAG Pipeline\evaluate.py:118: DeprecationWarning: LangchainLLMWrapper is deprecated and will be removed in a future version. Use llm_factory instead: from openai import OpenAI; from ragas.llms import llm_factory; llm = llm_factory('gpt-4o-mini', client=OpenAI(api_key='...'))
+  judge_llm = LangchainLLMWrapper(ChatOllama(model=JUDGE_MODEL, temperature=0))
+C:\Users\Rehan\Documents\AI Projects\Finance RAG Pipeline\evaluate.py:119: DeprecationWarning: LangchainEmbeddingsWrapper is deprecated and will be removed in a future version. Use the modern embedding providers instead: embedding_factory('openai', model='text-embedding-3-small', client=openai_client) or from ragas.embeddings import OpenAIEmbeddings, GoogleEmbeddings, HuggingFaceEmbeddings
+  judge_embeddings = LangchainEmbeddingsWrapper(OllamaEmbeddings(model=JUDGE_EMBEDDING_MODEL))
+Loaded 17 eval questions from eval_questions.json
+Fetching 30 files:   0%|          | 0/30 [00:00<?, ?it/s]Fetching 30 files: 100%|##########| 30/30 [00:00<?, ?it/s]
+You're using a XLMRobertaTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+
+=== Config: dense_only (mode=dense) — retrieval + generation ===
+[dense_only] question 1/17: What was Apple's total net sales for fiscal year 2025?
+[dense_only] question 2/17: What was Microsoft's total revenue for fiscal year 2025?
+[dense_only] question 3/17: What was NVIDIA's total revenue for fiscal year 2025?
+[dense_only] question 4/17: What was Adobe's total revenue for fiscal year 2024?
+[dense_only] question 5/17: What was Salesforce's total revenue for fiscal year 2025?
+[dense_only] question 6/17: What was Apple's diluted earnings per share for fiscal year 2025?
+[dense_only] question 7/17: What are Apple's main supply chain risks?
+[dense_only] question 8/17: How does Microsoft describe its cybersecurity risk exposure?
+[dense_only] question 9/17: What competitive risks does Salesforce identify in its business?
+[dense_only] question 10/17: How does Adobe describe the risk that generative AI poses to its business?
+[dense_only] question 11/17: What is NVIDIA's core business strategy as described in its 10-K?
+[dense_only] question 12/17: What is Salesforce's Agentforce and how does it fit into its product strategy?
+[dense_only] question 13/17: How did NVIDIA's quarterly research and development spending trend across its th
+[dense_only] question 14/17: Which company had higher total revenue in its most recent fiscal year: Apple or 
+[dense_only] question 15/17: How does NVIDIA's revenue growth rate compare to Adobe's over their most recent 
+[dense_only] question 16/17: How do NVIDIA's and Microsoft's R&D spending compare as a share of their total r
+[dense_only] question 17/17: How does Microsoft's most recent quarterly R&D spending compare to NVIDIA's most
+
+[dense_only] running RAGAS evaluation (17 questions x 4 metrics)...
+Evaluating:   0%|          | 0/68 [00:00<?, ?it/s]Evaluating:   1%|1         | 1/68 [02:03<2:17:26, 123.09s/it]Evaluating:   3%|2         | 2/68 [02:59<1:32:26, 84.05s/it] Evaluating:   4%|4         | 3/68 [03:25<1:01:58, 57.21s/it]Evaluating:   6%|5         | 4/68 [03:39<43:01, 40.34s/it]  Evaluating:   7%|7         | 5/68 [04:17<41:27, 39.48s/it]Evaluating:   9%|8         | 6/68 [05:06<44:04, 42.65s/it]Evaluating:  10%|#         | 7/68 [05:30<37:20, 36.73s/it]Evaluating:  12%|#1        | 8/68 [05:44<29:22, 29.37s/it]Evaluating:  13%|#3        | 9/68 [09:22<1:26:50, 88.31s/it]Evaluating:  15%|#4        | 10/68 [10:26<1:18:05, 80.79s/it]Evaluating:  16%|#6        | 11/68 [10:50<1:00:21, 63.54s/it]Evaluating:  18%|#7        | 12/68 [11:04<45:11, 48.43s/it]  Evaluating:  19%|#9        | 13/68 [13:12<1:06:19, 72.36s/it]Evaluating:  21%|##        | 14/68 [14:05<59:52, 66.53s/it]  Evaluating:  22%|##2       | 15/68 [14:28<47:13, 53.46s/it]Evaluating:  24%|##3       | 16/68 [14:41<35:43, 41.22s/it]Evaluating:  25%|##5       | 17/68 [17:55<1:14:17, 87.40s/it]Evaluating:  26%|##6       | 18/68 [18:37<1:01:22, 73.65s/it]Evaluating:  28%|##7       | 19/68 [18:57<47:01, 57.59s/it]  Evaluating:  29%|##9       | 20/68 [19:10<35:15, 44.07s/it]Evaluating:  31%|###       | 21/68 [20:52<48:08, 61.46s/it]Evaluating:  32%|###2      | 22/68 [21:47<45:35, 59.47s/it]Evaluating:  34%|###3      | 23/68 [22:17<38:06, 50.82s/it]Evaluating:  35%|###5      | 24/68 [22:30<28:58, 39.52s/it]Evaluating:  37%|###6      | 25/68 [30:44<2:05:51, 175.62s/it]Evaluating:  38%|###8      | 26/68 [31:38<1:37:33, 139.38s/it]Evaluating:  40%|###9      | 27/68 [33:49<1:33:25, 136.72s/it]Evaluating:  41%|####1     | 28/68 [34:07<1:07:31, 101.28s/it]Evaluating:  43%|####2     | 29/68 [39:53<1:53:27, 174.56s/it]Evaluating:  44%|####4     | 30/68 [40:47<1:27:41, 138.47s/it]Evaluating:  46%|####5     | 31/68 [41:30<1:07:41, 109.78s/it]Evaluating:  47%|####7     | 32/68 [41:47<49:06, 81.86s/it]   Evaluating:  49%|####8     | 33/68 [45:04<1:07:54, 116.41s/it]Evaluating:  50%|#####     | 34/68 [45:50<54:00, 95.31s/it]   Evaluating:  51%|#####1    | 35/68 [48:45<1:05:34, 119.22s/it]Evaluating:  53%|#####2    | 36/68 [48:58<46:39, 87.49s/it]   Evaluating:  54%|#####4    | 37/68 [54:40<1:24:37, 163.81s/it]Evaluating:  56%|#####5    | 38/68 [55:35<1:05:29, 130.99s/it]Evaluating:  57%|#####7    | 39/68 [56:10<49:24, 102.22s/it]  Evaluating:  59%|#####8    | 40/68 [56:26<35:36, 76.31s/it] Evaluating:  60%|######    | 41/68 [59:24<48:05, 106.87s/it]Evaluating:  62%|######1   | 42/68 [1:00:20<39:41, 91.59s/it]Evaluating:  63%|######3   | 43/68 [1:00:58<31:29, 75.56s/it]Evaluating:  65%|######4   | 44/68 [1:01:10<22:38, 56.60s/it]Evaluating:  66%|######6   | 45/68 [1:06:05<49:06, 128.12s/it]Evaluating:  68%|######7   | 46/68 [1:06:54<38:12, 104.22s/it]Evaluating:  69%|######9   | 47/68 [1:07:44<30:48, 88.04s/it] Evaluating:  71%|#######   | 48/68 [1:07:59<22:02, 66.10s/it]Evaluating:  72%|#######2  | 49/68 [1:10:20<28:06, 88.74s/it]Evaluating:  74%|#######3  | 50/68 [1:11:12<23:15, 77.55s/it]Evaluating:  75%|#######5  | 51/68 [1:11:56<19:08, 67.54s/it]Evaluating:  76%|#######6  | 52/68 [1:12:13<13:56, 52.29s/it]Evaluating:  78%|#######7  | 53/68 [1:15:37<24:26, 97.75s/it]Evaluating:  79%|#######9  | 54/68 [1:16:22<19:08, 82.05s/it]Evaluating:  81%|########  | 55/68 [1:16:43<13:49, 63.82s/it]Evaluating:  82%|########2 | 56/68 [1:16:55<09:36, 48.06s/it]Evaluating:  84%|########3 | 57/68 [1:18:04<10:00, 54.56s/it]Evaluating:  85%|########5 | 58/68 [1:18:55<08:52, 53.26s/it]Evaluating:  87%|########6 | 59/68 [1:19:47<07:58, 53.14s/it]Evaluating:  88%|########8 | 60/68 [1:20:02<05:32, 41.57s/it]Evaluating:  90%|########9 | 61/68 [1:23:37<10:55, 93.65s/it]Evaluating:  91%|#########1| 62/68 [1:24:34<08:15, 82.59s/it]Evaluating:  93%|#########2| 63/68 [1:25:22<06:01, 72.27s/it]Evaluating:  94%|#########4| 64/68 [1:25:37<03:39, 54.93s/it]Evaluating:  96%|#########5| 65/68 [1:28:20<04:22, 87.53s/it]Evaluating:  97%|#########7| 66/68 [1:29:08<02:31, 75.60s/it]Evaluating:  99%|#########8| 67/68 [1:29:59<01:08, 68.14s/it]Evaluating: 100%|##########| 68/68 [1:30:16<00:00, 52.93s/it]Evaluating: 100%|##########| 68/68 [1:30:16<00:00, 79.66s/it]
+[dense_only] done: faithfulness=0.8241, context_precision=0.4824, context_recall=0.7647, answer_relevancy=0.6491
+
+=== Config: hybrid_rrf (mode=rrf) — retrieval + generation ===
+[hybrid_rrf] question 1/17: What was Apple's total net sales for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 5
+[hybrid_rrf] question 2/17: What was Microsoft's total revenue for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 0
+[hybrid_rrf] question 3/17: What was NVIDIA's total revenue for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 2
+[hybrid_rrf] question 4/17: What was Adobe's total revenue for fiscal year 2024?
+[debug] dense returned 20, sparse returned 20, overlap: 4
+[hybrid_rrf] question 5/17: What was Salesforce's total revenue for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 0
+[hybrid_rrf] question 6/17: What was Apple's diluted earnings per share for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 5
+[hybrid_rrf] question 7/17: What are Apple's main supply chain risks?
+[debug] dense returned 20, sparse returned 20, overlap: 4
+[hybrid_rrf] question 8/17: How does Microsoft describe its cybersecurity risk exposure?
+[debug] dense returned 20, sparse returned 20, overlap: 6
+[hybrid_rrf] question 9/17: What competitive risks does Salesforce identify in its business?
+[debug] dense returned 20, sparse returned 20, overlap: 0
+[hybrid_rrf] question 10/17: How does Adobe describe the risk that generative AI poses to its business?
+[debug] dense returned 20, sparse returned 20, overlap: 4
+[hybrid_rrf] question 11/17: What is NVIDIA's core business strategy as described in its 10-K?
+[debug] dense returned 20, sparse returned 20, overlap: 8
+[hybrid_rrf] question 12/17: What is Salesforce's Agentforce and how does it fit into its product strategy?
+[debug] dense returned 20, sparse returned 20, overlap: 3
+[hybrid_rrf] question 13/17: How did NVIDIA's quarterly research and development spending trend across its th
+[debug] dense returned 20, sparse returned 20, overlap: 2
+[hybrid_rrf] question 14/17: Which company had higher total revenue in its most recent fiscal year: Apple or 
+[debug] dense returned 20, sparse returned 20, overlap: 1
+[hybrid_rrf] question 15/17: How does NVIDIA's revenue growth rate compare to Adobe's over their most recent 
+[debug] dense returned 20, sparse returned 20, overlap: 2
+[hybrid_rrf] question 16/17: How do NVIDIA's and Microsoft's R&D spending compare as a share of their total r
+[debug] dense returned 20, sparse returned 20, overlap: 0
+[hybrid_rrf] question 17/17: How does Microsoft's most recent quarterly R&D spending compare to NVIDIA's most
+[debug] dense returned 20, sparse returned 20, overlap: 3
+
+[hybrid_rrf] running RAGAS evaluation (17 questions x 4 metrics)...
+Evaluating:   0%|          | 0/68 [00:00<?, ?it/s]Evaluating:   1%|1         | 1/68 [02:57<3:17:56, 177.26s/it]Evaluating:   3%|2         | 2/68 [04:01<2:01:57, 110.88s/it]Evaluating:   4%|4         | 3/68 [04:53<1:30:58, 83.98s/it] Evaluating:   6%|5         | 4/68 [05:15<1:03:13, 59.28s/it]Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000002442CCE7E20>
+Traceback (most recent call last):
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Evaluating:   7%|7         | 5/68 [09:18<2:11:57, 125.67s/it]Exception raised in Job[5]: TimeoutError()
+Evaluating:   9%|8         | 6/68 [31:14<9:08:12, 530.52s/it]Evaluating:  10%|#         | 7/68 [32:15<6:23:16, 376.99s/it]Evaluating:  12%|#1        | 8/68 [32:32<4:22:16, 262.28s/it]Evaluating:  13%|#3        | 9/68 [36:03<4:02:10, 246.29s/it]Evaluating:  15%|#4        | 10/68 [38:04<3:20:42, 207.63s/it]Evaluating:  16%|#6        | 11/68 [38:42<2:27:59, 155.78s/it]Evaluating:  18%|#7        | 12/68 [39:08<1:48:27, 116.20s/it]Evaluating:  19%|#9        | 13/68 [48:11<3:45:02, 245.49s/it]Evaluating:  21%|##        | 14/68 [49:04<2:48:41, 187.43s/it]Evaluating:  22%|##2       | 15/68 [49:39<2:04:55, 141.42s/it]Evaluating:  24%|##3       | 16/68 [49:55<1:29:54, 103.74s/it]Evaluating:  25%|##5       | 17/68 [52:12<1:36:32, 113.58s/it]Evaluating:  26%|##6       | 18/68 [53:01<1:18:35, 94.30s/it] Evaluating:  28%|##7       | 19/68 [53:21<58:49, 72.03s/it]  Evaluating:  29%|##9       | 20/68 [53:37<44:12, 55.26s/it]Evaluating:  31%|###       | 21/68 [54:16<39:17, 50.17s/it]Evaluating:  32%|###2      | 22/68 [55:22<42:12, 55.06s/it]Evaluating:  34%|###3      | 23/68 [55:54<35:58, 47.96s/it]Evaluating:  35%|###5      | 24/68 [56:22<30:50, 42.06s/it]Evaluating:  37%|###6      | 25/68 [1:08:51<3:02:04, 254.05s/it]Evaluating:  38%|###8      | 26/68 [1:10:50<2:29:35, 213.70s/it]Evaluating:  40%|###9      | 27/68 [1:12:11<1:58:49, 173.89s/it]Evaluating:  41%|####1     | 28/68 [1:12:40<1:26:56, 130.41s/it]Evaluating:  43%|####2     | 29/68 [1:18:39<2:09:20, 198.98s/it]Evaluating:  44%|####4     | 30/68 [1:20:41<1:51:20, 175.79s/it]Evaluating:  46%|####5     | 31/68 [1:21:59<1:30:19, 146.49s/it]Evaluating:  47%|####7     | 32/68 [1:22:30<1:07:09, 111.94s/it]Exception raised in Job[32]: TimeoutError()
+Evaluating:  49%|####8     | 33/68 [1:49:19<5:27:13, 560.96s/it]Evaluating:  50%|#####     | 34/68 [1:50:52<3:58:18, 420.55s/it]Evaluating:  51%|#####1    | 35/68 [1:54:08<3:14:16, 353.24s/it]Evaluating:  53%|#####2    | 36/68 [1:54:22<2:14:08, 251.51s/it]Evaluating:  54%|#####4    | 37/68 [2:06:16<3:21:34, 390.14s/it]Evaluating:  56%|#####5    | 38/68 [2:07:04<2:23:47, 287.59s/it]Evaluating:  57%|#####7    | 39/68 [2:07:45<1:43:10, 213.48s/it]Evaluating:  59%|#####8    | 40/68 [2:08:04<1:12:23, 155.12s/it]Evaluating:  60%|######    | 41/68 [2:11:22<1:15:37, 168.07s/it]Evaluating:  62%|######1   | 42/68 [2:12:16<58:01, 133.92s/it]  Evaluating:  63%|######3   | 43/68 [2:12:54<43:49, 105.19s/it]Evaluating:  65%|######4   | 44/68 [2:13:07<30:58, 77.45s/it] Evaluating:  66%|######6   | 45/68 [2:20:03<1:08:39, 179.13s/it]Evaluating:  68%|######7   | 46/68 [2:20:49<50:59, 139.05s/it]  Evaluating:  69%|######9   | 47/68 [2:21:27<38:07, 108.93s/it]Evaluating:  71%|#######   | 48/68 [2:21:41<26:47, 80.37s/it] Evaluating:  72%|#######2  | 49/68 [2:24:10<31:55, 100.81s/it]Evaluating:  74%|#######3  | 50/68 [2:24:56<25:21, 84.55s/it] Evaluating:  75%|#######5  | 51/68 [2:25:39<20:22, 71.91s/it]Evaluating:  76%|#######6  | 52/68 [2:25:55<14:41, 55.08s/it]Evaluating:  78%|#######7  | 53/68 [2:27:20<16:05, 64.34s/it]Evaluating:  79%|#######9  | 54/68 [2:28:04<13:32, 58.06s/it]Evaluating:  81%|########  | 55/68 [2:28:26<10:13, 47.16s/it]Evaluating:  82%|########2 | 56/68 [2:28:38<07:21, 36.80s/it]Evaluating:  84%|########3 | 57/68 [2:34:43<24:46, 135.10s/it]Evaluating:  85%|########5 | 58/68 [2:35:30<18:06, 108.63s/it]Evaluating:  87%|########6 | 59/68 [2:36:04<12:58, 86.48s/it] Evaluating:  88%|########8 | 60/68 [2:36:21<08:43, 65.38s/it]Evaluating:  90%|########9 | 61/68 [2:40:58<15:03, 129.02s/it]Evaluating:  91%|#########1| 62/68 [2:41:48<10:32, 105.39s/it]Evaluating:  93%|#########2| 63/68 [2:42:35<07:19, 87.86s/it] Evaluating:  94%|#########4| 64/68 [2:42:53<04:26, 66.69s/it]Evaluating:  96%|#########5| 65/68 [2:46:58<06:01, 120.47s/it]Evaluating:  97%|#########7| 66/68 [2:47:49<03:19, 99.56s/it] Evaluating:  99%|#########8| 67/68 [2:48:35<01:23, 83.54s/it]Evaluating: 100%|##########| 68/68 [2:48:51<00:00, 63.16s/it]Evaluating: 100%|##########| 68/68 [2:48:51<00:00, 148.99s/it]
+You're using a XLMRobertaTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+[hybrid_rrf] done: faithfulness=0.8009, context_precision=0.5354, context_recall=0.6732, answer_relevancy=0.6979
+
+=== Config: hybrid_rerank (mode=rerank) — retrieval + generation ===
+[hybrid_rerank] question 1/17: What was Apple's total net sales for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 5
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.03252  AAPL 1  AAPL_10-Q_2025-08-01_1_9
+  rrf=0.03178  AAPL 1  AAPL_10-Q_2025-05-02_1_9
+  rrf=0.03150  AAPL 8  AAPL_10-K_2025-10-31_8_11
+  rrf=0.02780  AAPL 1  AAPL_10-Q_2025-01-31_1_7
+  rrf=0.02548  AAPL 2  AAPL_10-Q_2025-01-31_2_2
+[hybrid_rerank] question 2/17: What was Microsoft's total revenue for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 0
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.01639  MSFT 8  MSFT_10-K_2024-07-30_8_70
+  rrf=0.01639  NVDA 2  NVDA_10-Q_2024-05-29_2_13
+  rrf=0.01613  MSFT 2  MSFT_10-Q_2025-10-29_2_1
+  rrf=0.01613  CRM 7  CRM_10-K_2025-03-05_7_17
+  rrf=0.01587  MSFT 1  MSFT_10-Q_2025-04-30_1_48
+[hybrid_rerank] question 3/17: What was NVIDIA's total revenue for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 2
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.02973  NVDA 9A  NVDA_10-K_2025-02-26_9A_62
+  rrf=0.02707  NVDA 9A  NVDA_10-K_2025-02-26_9A_41
+  rrf=0.01639  NVDA 9A  NVDA_10-K_2025-02-26_9A_7
+  rrf=0.01613  NVDA 1  NVDA_10-Q_2025-11-19_1_1
+  rrf=0.01613  NVDA 2  NVDA_10-Q_2024-11-20_2_12
+[hybrid_rerank] question 4/17: What was Adobe's total revenue for fiscal year 2024?
+[debug] dense returned 20, sparse returned 20, overlap: 4
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.03175  ADBE 7  ADBE_10-K_2025-01-13_7_7
+  rrf=0.03028  ADBE 2  ADBE_10-Q_2024-06-26_2_5
+  rrf=0.02957  ADBE 2  ADBE_10-Q_2024-09-25_2_5
+  rrf=0.02879  ADBE 2  ADBE_10-Q_2024-03-27_2_5
+  rrf=0.01639  ADBE 8  ADBE_10-K_2025-01-13_8_28
+[hybrid_rerank] question 5/17: What was Salesforce's total revenue for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 0
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.01639  CRM 1  CRM_10-Q_2025-09-03_1_2
+  rrf=0.01639  CRM 7  CRM_10-K_2025-03-05_7_18
+  rrf=0.01613  CRM 8  CRM_10-K_2025-03-05_8_14
+  rrf=0.01613  NVDA 2  NVDA_10-Q_2024-05-29_2_13
+  rrf=0.01587  CRM 1  CRM_10-Q_2025-05-28_1_2
+[hybrid_rerank] question 6/17: What was Apple's diluted earnings per share for fiscal year 2025?
+[debug] dense returned 20, sparse returned 20, overlap: 5
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.03279  AAPL 8  AAPL_10-K_2025-10-31_8_12
+  rrf=0.03200  AAPL 1  AAPL_10-Q_2025-05-02_1_10
+  rrf=0.03175  AAPL 1  AAPL_10-Q_2025-08-01_1_10
+  rrf=0.03102  AAPL 1  AAPL_10-Q_2025-01-31_1_8
+  rrf=0.02780  AAPL 8  AAPL_10-K_2025-10-31_8_1
+[hybrid_rerank] question 7/17: What are Apple's main supply chain risks?
+[debug] dense returned 20, sparse returned 20, overlap: 4
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.03252  AAPL 1A  AAPL_10-Q_2025-05-02_1A_3
+  rrf=0.03178  AAPL 1A  AAPL_10-Q_2025-05-02_1A_4
+  rrf=0.02996  AAPL 1A  AAPL_10-K_2024-11-01_1A_4
+  rrf=0.02967  AAPL 1A  AAPL_10-K_2025-10-31_1A_5
+  rrf=0.01613  NVDA 2  NVDA_10-Q_2025-05-28_2_5
+[hybrid_rerank] question 8/17: How does Microsoft describe its cybersecurity risk exposure?
+[debug] dense returned 20, sparse returned 20, overlap: 6
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.03279  MSFT 1C  MSFT_10-K_2024-07-30_1C_3
+  rrf=0.03055  MSFT 1C  MSFT_10-K_2025-07-30_1C_4
+  rrf=0.03037  MSFT 1C  MSFT_10-K_2024-07-30_1C_4
+  rrf=0.03021  MSFT 1C  MSFT_10-K_2025-07-30_1C_3
+  rrf=0.02863  MSFT 1C  MSFT_10-K_2025-07-30_1C_0
+[hybrid_rerank] question 9/17: What competitive risks does Salesforce identify in its business?
+[debug] dense returned 20, sparse returned 20, overlap: 0
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.01639  CRM 2  CRM_10-Q_2024-05-29_2_1
+  rrf=0.01639  MSFT 2  MSFT_10-Q_2024-01-30_2_3
+  rrf=0.01613  CRM 2  CRM_10-Q_2024-08-28_2_1
+  rrf=0.01613  MSFT 2  MSFT_10-Q_2024-04-25_2_3
+  rrf=0.01587  CRM 2  CRM_10-Q_2024-12-03_2_1
+[hybrid_rerank] question 10/17: How does Adobe describe the risk that generative AI poses to its business?
+[debug] dense returned 20, sparse returned 20, overlap: 4
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.02759  CRM 1A  CRM_10-K_2024-03-06_1A_35
+  rrf=0.02715  CRM 1A  CRM_10-Q_2025-12-03_1A_35
+  rrf=0.02649  CRM 1A  CRM_10-K_2025-03-05_1A_34
+  rrf=0.02620  CRM 1A  CRM_10-Q_2025-05-28_1A_35
+  rrf=0.01639  ADBE 1A  ADBE_10-Q_2024-06-26_1A_1
+[hybrid_rerank] question 11/17: What is NVIDIA's core business strategy as described in its 10-K?
+[debug] dense returned 20, sparse returned 20, overlap: 8
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.03227  NVDA 2  NVDA_10-Q_2024-11-20_2_1
+  rrf=0.03175  NVDA 2  NVDA_10-Q_2024-08-28_2_1
+  rrf=0.03101  NVDA 2  NVDA_10-Q_2024-05-29_2_1
+  rrf=0.02927  NVDA 7  NVDA_10-K_2024-02-21_7_0
+  rrf=0.02903  NVDA 7  NVDA_10-K_2025-02-26_7_0
+[hybrid_rerank] question 12/17: What is Salesforce's Agentforce and how does it fit into its product strategy?
+[debug] dense returned 20, sparse returned 20, overlap: 3
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.03252  CRM 1  CRM_10-K_2025-03-05_1_11
+  rrf=0.02845  CRM 1  CRM_10-K_2025-03-05_1_4
+  rrf=0.02822  CRM 1  CRM_10-K_2025-03-05_1_0
+  rrf=0.01639  CRM 1  CRM_10-K_2024-03-06_1_7
+  rrf=0.01613  CRM 1  CRM_10-K_2025-03-05_1_7
+[hybrid_rerank] question 13/17: How did NVIDIA's quarterly research and development spending trend across its th
+[debug] dense returned 20, sparse returned 20, overlap: 2
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.02889  NVDA 2  NVDA_10-Q_2024-05-29_2_2
+  rrf=0.02822  NVDA 2  NVDA_10-Q_2025-05-28_2_2
+  rrf=0.01639  NVDA 2  NVDA_10-Q_2025-11-19_2_2
+  rrf=0.01613  NVDA 2  NVDA_10-Q_2025-08-27_2_2
+  rrf=0.01613  NVDA 2  NVDA_10-Q_2025-08-27_2_14
+[hybrid_rerank] question 14/17: Which company had higher total revenue in its most recent fiscal year: Apple or 
+[debug] dense returned 20, sparse returned 20, overlap: 1
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.02831  AAPL 1  AAPL_10-Q_2025-08-01_1_9
+  rrf=0.01639  MSFT 2  MSFT_10-Q_2025-10-29_2_1
+  rrf=0.01639  NVDA 1A  NVDA_10-K_2024-02-21_1A_10
+  rrf=0.01613  MSFT 8  MSFT_10-K_2024-07-30_8_70
+  rrf=0.01613  NVDA 2  NVDA_10-Q_2024-05-29_2_12
+[hybrid_rerank] question 15/17: How does NVIDIA's revenue growth rate compare to Adobe's over their most recent 
+[debug] dense returned 20, sparse returned 20, overlap: 2
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.03028  NVDA 2  NVDA_10-Q_2024-08-28_2_13
+  rrf=0.02985  NVDA 2  NVDA_10-Q_2024-11-20_2_12
+  rrf=0.01639  ADBE 2  ADBE_10-Q_2025-03-26_2_3
+  rrf=0.01613  NVDA 7  NVDA_10-K_2024-02-21_7_0
+  rrf=0.01613  ADBE 2  ADBE_10-Q_2025-06-25_2_3
+[hybrid_rerank] question 16/17: How do NVIDIA's and Microsoft's R&D spending compare as a share of their total r
+[debug] dense returned 20, sparse returned 20, overlap: 0
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.01639  NVDA 1  NVDA_10-Q_2025-05-28_1_1
+  rrf=0.01639  CRM 7  CRM_10-K_2024-03-06_7_2
+  rrf=0.01613  NVDA 9A  NVDA_10-K_2024-02-21_9A_10
+  rrf=0.01613  NVDA 2  NVDA_10-Q_2024-08-28_2_13
+  rrf=0.01587  NVDA 1  NVDA_10-Q_2024-11-20_1_1
+[hybrid_rerank] question 17/17: How does Microsoft's most recent quarterly R&D spending compare to NVIDIA's most
+[debug] dense returned 20, sparse returned 20, overlap: 3
+[debug] RRF-only top 5 (pre-rerank):
+  rrf=0.02686  NVDA 2  NVDA_10-Q_2024-08-28_2_2
+  rrf=0.02617  NVDA 2  NVDA_10-Q_2025-11-19_2_2
+  rrf=0.02548  NVDA 2  NVDA_10-Q_2025-05-28_2_2
+  rrf=0.01639  NVDA 1  NVDA_10-Q_2025-11-19_1_1
+  rrf=0.01639  NVDA 2  NVDA_10-Q_2024-08-28_2_13
+
+[hybrid_rerank] running RAGAS evaluation (17 questions x 4 metrics)...
+Evaluating:   0%|          | 0/68 [00:00<?, ?it/s]Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000002442CCE7E20>
+Traceback (most recent call last):
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Evaluating:   1%|1         | 1/68 [03:03<3:24:35, 183.21s/it]Evaluating:   3%|2         | 2/68 [04:07<2:04:27, 113.14s/it]Evaluating:   4%|4         | 3/68 [04:56<1:30:44, 83.75s/it] Evaluating:   6%|5         | 4/68 [05:10<1:00:19, 56.56s/it]Evaluating:   7%|7         | 5/68 [07:39<1:34:11, 89.71s/it]Evaluating:   9%|8         | 6/68 [08:25<1:17:14, 74.75s/it]Evaluating:  10%|#         | 7/68 [08:46<58:21, 57.40s/it]  Evaluating:  12%|#1        | 8/68 [09:00<43:22, 43.37s/it]Evaluating:  13%|#3        | 9/68 [13:40<1:55:31, 117.49s/it]Evaluating:  15%|#4        | 10/68 [14:34<1:34:34, 97.83s/it]Evaluating:  16%|#6        | 11/68 [15:00<1:11:56, 75.73s/it]Evaluating:  18%|#7        | 12/68 [15:46<1:02:21, 66.82s/it]Evaluating:  19%|#9        | 13/68 [17:47<1:16:19, 83.27s/it]Evaluating:  21%|##        | 14/68 [18:35<1:05:20, 72.60s/it]Evaluating:  22%|##2       | 15/68 [19:01<51:43, 58.56s/it]  Evaluating:  24%|##3       | 16/68 [19:17<39:38, 45.74s/it]Evaluating:  25%|##5       | 17/68 [21:44<1:04:40, 76.08s/it]Evaluating:  26%|##6       | 18/68 [22:28<55:28, 66.57s/it]  Evaluating:  28%|##7       | 19/68 [22:49<43:13, 52.93s/it]Evaluating:  29%|##9       | 20/68 [23:03<32:50, 41.04s/it]Evaluating:  31%|###       | 21/68 [24:45<46:32, 59.41s/it]Evaluating:  32%|###2      | 22/68 [25:35<43:26, 56.66s/it]Evaluating:  34%|###3      | 23/68 [26:03<36:05, 48.12s/it]Evaluating:  35%|###5      | 24/68 [26:18<27:53, 38.04s/it]Evaluating:  37%|###6      | 25/68 [34:12<2:01:01, 168.87s/it]Evaluating:  38%|###8      | 26/68 [35:06<1:34:06, 134.44s/it]Evaluating:  40%|###9      | 27/68 [36:10<1:17:24, 113.27s/it]Evaluating:  41%|####1     | 28/68 [36:23<55:28, 83.22s/it]   Evaluating:  43%|####2     | 29/68 [41:59<1:43:25, 159.12s/it]Evaluating:  44%|####4     | 30/68 [42:53<1:20:40, 127.38s/it]Evaluating:  46%|####5     | 31/68 [46:21<1:33:28, 151.57s/it]Evaluating:  47%|####7     | 32/68 [46:33<1:05:57, 109.92s/it]Evaluating:  49%|####8     | 33/68 [50:47<1:29:20, 153.16s/it]Evaluating:  50%|#####     | 34/68 [51:37<1:09:14, 122.19s/it]Evaluating:  51%|#####1    | 35/68 [53:31<1:05:46, 119.59s/it]Evaluating:  53%|#####2    | 36/68 [53:43<46:40, 87.51s/it]   Evaluating:  54%|#####4    | 37/68 [57:54<1:10:26, 136.35s/it]Evaluating:  56%|#####5    | 38/68 [58:56<57:02, 114.08s/it]  Evaluating:  57%|#####7    | 39/68 [59:32<43:47, 90.61s/it] Evaluating:  59%|#####8    | 40/68 [59:48<31:52, 68.32s/it]Evaluating:  60%|######    | 41/68 [1:06:20<1:14:25, 165.40s/it]Evaluating:  62%|######1   | 42/68 [1:07:13<57:07, 131.83s/it]  Evaluating:  63%|######3   | 43/68 [1:08:09<45:21, 108.86s/it]Evaluating:  65%|######4   | 44/68 [1:08:21<31:59, 80.00s/it] Evaluating:  66%|######6   | 45/68 [1:12:33<50:24, 131.51s/it]Evaluating:  68%|######7   | 46/68 [1:13:19<38:48, 105.83s/it]Evaluating:  69%|######9   | 47/68 [1:13:58<30:02, 85.83s/it] Evaluating:  71%|#######   | 48/68 [1:14:12<21:26, 64.32s/it]Evaluating:  72%|#######2  | 49/68 [1:17:48<34:43, 109.67s/it]Evaluating:  74%|#######3  | 50/68 [1:18:40<27:42, 92.36s/it] Evaluating:  75%|#######5  | 51/68 [1:19:48<24:07, 85.15s/it]Evaluating:  76%|#######6  | 52/68 [1:20:03<17:04, 64.04s/it]Evaluating:  78%|#######7  | 53/68 [1:23:31<26:47, 107.16s/it]Evaluating:  79%|#######9  | 54/68 [1:24:27<21:27, 91.93s/it] Evaluating:  81%|########  | 55/68 [1:24:54<15:42, 72.50s/it]Evaluating:  82%|########2 | 56/68 [1:25:11<11:10, 55.90s/it]Evaluating:  84%|########3 | 57/68 [1:27:56<16:14, 88.62s/it]Evaluating:  85%|########5 | 58/68 [1:28:41<12:35, 75.50s/it]Evaluating:  87%|########6 | 59/68 [1:29:22<09:46, 65.17s/it]Evaluating:  88%|########8 | 60/68 [1:29:36<06:36, 49.61s/it]Evaluating:  90%|########9 | 61/68 [1:31:30<08:03, 69.06s/it]Evaluating:  91%|#########1| 62/68 [1:32:25<06:29, 64.94s/it]Evaluating:  93%|#########2| 63/68 [1:33:11<04:56, 59.27s/it]Evaluating:  94%|#########4| 64/68 [1:33:35<03:13, 48.50s/it]Evaluating:  96%|#########5| 65/68 [1:34:35<02:35, 51.91s/it]Evaluating:  97%|#########7| 66/68 [1:35:23<01:41, 50.81s/it]Evaluating:  99%|#########8| 67/68 [1:36:09<00:49, 49.50s/it]Evaluating: 100%|##########| 68/68 [1:36:24<00:00, 39.17s/it]Evaluating: 100%|##########| 68/68 [1:36:24<00:00, 85.07s/it]
+[hybrid_rerank] done: faithfulness=0.7889, context_precision=0.5000, context_recall=0.6987, answer_relevancy=0.7273
+
+Saved 51 per-question results to eval_results.json
+
+=== Final comparison ===
+| Config           | Faithfulness |  Context Precision |  Context Recall |  Answer Relevancy |
+|--------------------------------------------------------------------------------------------|
+| Dense-only       |       0.8241 |             0.4824 |          0.7647 |            0.6491 |
+| Hybrid (RRF)     |       0.8009 |             0.5354 |          0.6732 |            0.6979 |
+| Hybrid + Rerank  |       0.7889 |             0.5000 |          0.6987 |            0.7273 |
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000002442CCE7E20>
+Traceback (most recent call last):
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+RuntimeError: Event loop is closed
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000002442CCE7E20>
+Traceback (most recent call last):
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+  File "C:\Users\Rehan\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+RuntimeError: Event loop is closed

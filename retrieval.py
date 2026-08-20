@@ -22,27 +22,46 @@ def reciprocal_rank_fusion(dense_results, sparse_results, k=60):
     return scores
 
 
-def hybrid_search(query, client, dense_model, sparse_model, reranker, top_k=5, fetch_k=20, k=60, rerank_candidates=20):
+def _format_result(result, rrf_score=None, rerank_score=None):
+    return {
+        "chunk_id": result.payload["chunk_id"],
+        "ticker": result.payload["ticker"],
+        "item_num": result.payload["item_num"],
+        "text": result.payload["text"],
+        "rrf_score": rrf_score,
+        "rerank_score": rerank_score,
+    }
+
+
+def hybrid_search(query, client, dense_model, sparse_model, reranker=None, top_k=5, fetch_k=20, k=60,
+                   rerank_candidates=20, mode="rerank"):
+    # mode="dense": dense retrieval only, no fusion, no reranking
+    # mode="rrf": dense + sparse fused with RRF, top_k taken straight from fusion (no reranking)
+    # mode="rerank" (default): full pipeline — RRF fusion, then cross-encoder reranking
+
     # 1. dense query embedding
     dense_query_vec = dense_model.encode(
         [query], return_dense=True, return_sparse=False, return_colbert_vecs=False
     )["dense_vecs"][0].tolist()
 
-    # 2. sparse query embedding
+    # 2. dense retrieval
+    dense_results = client.query_points(
+        collection_name=COLLECTION_NAME,
+        query=dense_query_vec,
+        using=DENSE_VECTOR_NAME,
+        limit=top_k if mode == "dense" else fetch_k,
+        with_payload=True,
+    ).points
+
+    if mode == "dense":
+        return [_format_result(r) for r in dense_results[:top_k]]
+
+    # 3. sparse query embedding
     sparse_query_vec_raw = list(sparse_model.embed([query]))[0]
     sparse_query_vec = models.SparseVector(
         indices=sparse_query_vec_raw.indices.tolist(),
         values=sparse_query_vec_raw.values.tolist(),
     )
-
-    # 3. dense retrieval
-    dense_results = client.query_points(
-        collection_name=COLLECTION_NAME,
-        query=dense_query_vec,
-        using=DENSE_VECTOR_NAME,
-        limit=fetch_k,
-        with_payload=True,
-    ).points
 
     # 4. sparse retrieval
     sparse_results = client.query_points(
@@ -69,8 +88,12 @@ def hybrid_search(query, client, dense_model, sparse_model, reranker, top_k=5, f
     for result in dense_results + sparse_results:
         id_to_result[result.id] = result
 
-    # sort chunk_ids by fused RRF score, descending — take a larger candidate
-    # set than top_k, so the reranker has real options to work with
+    if mode == "rrf":
+        top_ids = sorted(fused_scores.items(), key=lambda item: item[1], reverse=True)[:top_k]
+        return [_format_result(id_to_result[chunk_point_id], rrf_score=rrf_score) for chunk_point_id, rrf_score in top_ids]
+
+    # mode == "rerank": sort chunk_ids by fused RRF score, descending — take a
+    # larger candidate set than top_k, so the reranker has real options to work with
     candidate_ids = sorted(fused_scores.items(), key=lambda item: item[1], reverse=True)[:rerank_candidates]
 
     # --- DEBUG: original RRF-only order, before reranking ---
@@ -93,18 +116,8 @@ def hybrid_search(query, client, dense_model, sparse_model, reranker, top_k=5, f
         reverse=True,
     )[:top_k]
 
-    final_results = []
-    for result, rrf_score, rerank_score in reranked:
-        final_results.append({
-            "chunk_id": result.payload["chunk_id"],
-            "ticker": result.payload["ticker"],
-            "item_num": result.payload["item_num"],
-            "text": result.payload["text"],
-            "rrf_score": rrf_score,
-            "rerank_score": rerank_score,
-        })
-
-    return final_results
+    return [_format_result(result, rrf_score=rrf_score, rerank_score=rerank_score)
+            for result, rrf_score, rerank_score in reranked]
 
 
 if __name__ == "__main__":
